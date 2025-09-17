@@ -1,0 +1,23 @@
+<mat-card>
+  <form [formGroup]="form" (submit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput id="name" name="name" formControlName="name" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput id="password" name="password" formControlName="password" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Confirm Password</mat-label>
+      <input
+        matInput
+        id="confirmPassword"
+        name="confirmPassword"
+        formControlName="confirmPassword"
+      />
+    </mat-form-field>
+    <br />
+    <button matButton="elevated" color="accent" type="submit">Save Post</button>
+  </form>
+</mat-card>
