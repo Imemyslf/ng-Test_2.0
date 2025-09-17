@@ -1,23 +1,47 @@
 <mat-card>
   <form [formGroup]="form" (submit)="onSubmit()">
+    <!-- <div class="namem"> -->
     <mat-form-field>
-      <mat-label>Email</mat-label>
+      <mat-label>Name</mat-label>
       <input matInput id="name" name="name" formControlName="name" />
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Password</mat-label>
-      <input matInput id="password" name="password" formControlName="password" />
+      <mat-label>Email</mat-label>
+      <input matInput id="email" name="email" formControlName="email" />
     </mat-form-field>
+    <!-- </div> -->
+    <!-- <div class="passcon"> -->
     <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        [type]="showPassword ? 'text' : 'password'"
+        id="password"
+        name="password"
+        formControlName="password"
+      />
+      <button (click)="togglePasswordVisibility('password')" type="button" matSuffix>
+        <mat-icon>{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
       <mat-label>Confirm Password</mat-label>
       <input
         matInput
+        [type]="showConfirmPassword ? 'text' : 'password'"
         id="confirmPassword"
         name="confirmPassword"
         formControlName="confirmPassword"
       />
+      <button (click)="togglePasswordVisibility('showConfirmPassword')" type="button" matSuffix>
+        <mat-icon>{{ showConfirmPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+      </button>
     </mat-form-field>
+    <!-- </div> -->
     <br />
-    <button matButton="elevated" color="accent" type="submit">Save Post</button>
+    <button matButton="outlined" color="accent" type="submit">Sign up</button>
+    <button matButton="outlined" color="primary" type="submit" (click)="form.reset()">
+      Cancel
+    </button>
   </form>
 </mat-card>
