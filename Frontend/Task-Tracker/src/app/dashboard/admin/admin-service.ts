@@ -19,7 +19,7 @@ export class AdminService {
 
     const headers = { Authorization: `Bearer ${token}` };
     this.httpClient
-      .get<{ message: string }>(`http://localhost:3000/users/admin/get-user`, {
+      .get<{ message: string }>(`http://localhost:3000/api/users/admin/get-user`, {
         headers,
       })
       .subscribe({

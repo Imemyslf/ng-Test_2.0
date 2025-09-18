@@ -1,6 +1,7 @@
 const express = require("express");
 const verifyToken = require("../middleware/authMiddleware");
 const authorizeRole = require("../middleware/roleMiddleware");
+const adminController = require("../controllers/adminController");
 
 const router = express.Router();
 
@@ -9,7 +10,12 @@ router.get("/admin", verifyToken, authorizeRole("admin"), (req, res, next) => {
   res.json({ message: `Welcome Admin` });
 });
 
-// router.get("/admin/get-user");
+router.get(
+  "/admin/get-user",
+  verifyToken,
+  authorizeRole("admin"),
+  adminController.getUser
+);
 
 //manager: access by only two role
 router.get(

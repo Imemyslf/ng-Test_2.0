@@ -3,6 +3,7 @@ const dotenv = require("dotenv").config();
 const dbConnect = require("./config/dbConnect");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
+const cors = require("cors");
 
 dbConnect();
 
@@ -21,6 +22,14 @@ app.use((req, res, next) => {
 
 //Middleware
 app.use(express.json());
+app.use(cors());
+
+app.use((req, res, next) => {
+  const _FORWARD_IP = req.get("x-forwarded-for");
+  console.log("_FORWARD_IP (CLIENT IP ADDRESS):", _FORWARD_IP);
+  console.dir(req.headers);
+  next();
+});
 
 //Routes
 app.use("/api/auth", authRoutes);
