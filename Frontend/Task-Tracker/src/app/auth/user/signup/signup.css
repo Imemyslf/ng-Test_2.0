@@ -6,8 +6,9 @@
 
 mat-card {
   display: block;
-  padding: 1rem;
   width: 100%;
+  height: auto;
+  padding: 1rem;
   margin-top: 1rem;
 }
 

@@ -1,0 +1,16 @@
+.mode {
+  display: flex;
+}
+
+.mode p {
+  margin-left: 0.5rem;
+}
+
+.first {
+  text-align: end;
+}
+
+.btn {
+  display: flex;
+  justify-content: flex-end;
+}

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
-import { MatCard, MatCardActions } from '@angular/material/card';
-import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatCard } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 
@@ -38,6 +38,7 @@ export class Signup {
       this.showPassword = !this.showPassword;
     }
   }
+
   onSubmit() {
     if (this.form.invalid) {
       return;
