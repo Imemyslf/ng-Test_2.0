@@ -1,0 +1,13 @@
+:host {
+  width: 90%;
+  height: 80%;
+}
+
+.divider {
+  display: flex;
+  gap: 1rem;
+}
+
+.divider div {
+  flex: 1;
+}

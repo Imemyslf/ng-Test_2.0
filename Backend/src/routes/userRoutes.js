@@ -4,10 +4,14 @@ const authorizeRole = require("../middleware/roleMiddleware");
 
 const router = express.Router();
 
+//admin: acess by only one role
 router.get("/admin", verifyToken, authorizeRole("admin"), (req, res, next) => {
   res.json({ message: `Welcome Admin` });
 });
 
+// router.get("/admin/get-user");
+
+//manager: access by only two role
 router.get(
   "/manager",
   verifyToken,
@@ -17,10 +21,11 @@ router.get(
   }
 );
 
+//user: access by all
 router.get(
   "/user",
   verifyToken,
-  authorizeRole("admin", "manager", "user"),
+  authorizeRole("admin", "manager", "employee"),
   (req, res, next) => {
     res.json({ message: `Welcome User` });
   }

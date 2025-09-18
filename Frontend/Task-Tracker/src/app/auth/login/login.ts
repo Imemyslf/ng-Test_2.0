@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatCard } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { AuthService } from '../auth.service';
+import { Auth, User } from '../auth.model';
 
 @Component({
   selector: 'app-login',
@@ -13,29 +15,39 @@ import { MatInputModule } from '@angular/material/input';
   styleUrl: './login.css',
 })
 export class Login {
+  private authService = inject(AuthService);
+
   form = new FormGroup({
     email: new FormControl('', {
       validators: [Validators.required, Validators.email],
     }),
     password: new FormControl('', {
-      validators: Validators.required,
+      validators: [Validators.required, Validators.minLength(6)],
     }),
   });
 
   showPassword = false;
-  showConfirmPassword = false;
 
   togglePasswordVisibility(pass: string) {
-    if (pass === 'showConfirmPassword') {
-      this.showConfirmPassword = !this.showConfirmPassword;
-    } else {
-      this.showPassword = !this.showPassword;
-    }
+    this.showPassword = !this.showPassword;
   }
+
   onSubmit() {
     if (this.form.invalid) {
       return;
     }
+
+    const user: Auth = {
+      id: Math.random().toString(),
+      username: this.form.value.email!,
+      password: this.form.value.password!,
+    };
+
+    this.authService.onLogIn(user).subscribe({
+      next: (result) => [
+        console.log('Token Generated: ', result.token, 'User Role: ', result.role),
+      ],
+    });
     console.log(this.form.value);
   }
 }
