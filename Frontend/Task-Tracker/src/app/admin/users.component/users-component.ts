@@ -1,6 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { AdminService } from '../../services/admin.service';
-import { Employee } from './user.model';
 
 @Component({
   selector: 'app-users-component',
@@ -17,6 +16,14 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {
     this.adminService.onGetUser().subscribe({
       next: (user) => console.log(user),
+      error: (err) => console.log(err),
+    });
+  }
+
+  onSelectedUser(employeeId: string) {
+    console.log(employeeId);
+    this.adminService.onGetTask(employeeId).subscribe({
+      next: (result) => console.log(result),
       error: (err) => console.log(err),
     });
   }

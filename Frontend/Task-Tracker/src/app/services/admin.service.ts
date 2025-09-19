@@ -1,7 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Task, Userdata } from '../module/admin.module';
+import { Task } from '../module/admin.module';
 import { HttpClient } from '@angular/common/http';
-import { Employee } from '../admin/users.component/user.model';
+import { Employee } from '../module/user.module';
 import { map, Observable } from 'rxjs';
 
 @Injectable({
@@ -9,10 +9,11 @@ import { map, Observable } from 'rxjs';
 })
 export class AdminService {
   private employees = signal<Employee[] | undefined>([]);
-  private tasks = signal([]);
+  private tasks = signal<Task[] | undefined>([]);
   private httpClient = inject(HttpClient);
 
   loadedEmployee = this.employees.asReadonly();
+  loadedTask = this.tasks.asReadonly();
 
   onGetUser(): Observable<any> {
     const savedData = localStorage.getItem('userToken');
@@ -35,8 +36,33 @@ export class AdminService {
         map((result) => {
           console.log(result);
           this.employees.set(result.users);
-          console.log(this.employees());
+          console.log('Employess inside Map', this.employees());
           return result.users;
+        })
+      );
+  }
+
+  onGetTask(employeeId: string): Observable<any> {
+    const savedData = localStorage.getItem('userToken');
+    let token: string = '';
+    if (savedData) {
+      const data = JSON.parse(savedData);
+      token = data.token;
+      console.log(token);
+    }
+
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.httpClient
+      .get<{ message: string; tasks: Task[] }>(
+        `http://localhost:3000/api/users/${employeeId}/tasks`,
+        {
+          headers,
+        }
+      )
+      .pipe(
+        map((result) => {
+          this.tasks.set(result.tasks);
+          return result.message;
         })
       );
   }

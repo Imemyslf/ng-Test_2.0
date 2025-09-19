@@ -1,7 +1,7 @@
 const Employee = require("../models/employee");
 const Task = require("../models/task");
 
-exports.getUser = (req, res, next) => {
+exports.getUsers = (req, res, next) => {
   console.log("Inisde getUser");
 
   Employee.find()
@@ -10,7 +10,7 @@ exports.getUser = (req, res, next) => {
       // console.log(employees);
       const transformedEmployee = employees.map((e) => {
         return {
-          id: e.user._id,
+          id: e._id,
           username: e.user.username,
           name: e.user.name,
         };
@@ -18,7 +18,7 @@ exports.getUser = (req, res, next) => {
       console.log(transformedEmployee);
       res.status(200).json({
         message: "Employee Fetched Successfully",
-        user: transformedEmployee,
+        users: transformedEmployee,
       });
     })
     .catch((err) => {

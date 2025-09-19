@@ -1,6 +1,6 @@
 <div>
   @for(employee of employees(); track employee.id){
-  <div>
+  <div (click)="onSelectedUser(employee.id)">
     <p>{{ employee.name }}</p>
   </div>
   }
