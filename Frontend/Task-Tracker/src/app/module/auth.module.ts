@@ -22,6 +22,7 @@ export const userRoles: User[] = [
 
 export interface Auth {
   id: string;
+  name: string;
   username: string;
   password: string;
   role?: string;

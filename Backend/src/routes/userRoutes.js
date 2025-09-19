@@ -17,6 +17,8 @@ router.get(
   adminController.getUser
 );
 
+router.post("/admin/create-post", adminController.postTask);
+
 //manager: access by only two role
 router.get(
   "/manager",

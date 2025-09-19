@@ -6,8 +6,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatOption, MatSelect } from '@angular/material/select';
-import { Auth, ROLE, User, userRoles } from '../auth.model';
-import { AuthService } from '../auth.service';
+import { Auth, ROLE, User, userRoles } from '../../module/auth.module';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -30,6 +30,9 @@ export class Signup {
   roles = userRoles;
 
   form = new FormGroup({
+    name: new FormControl('', {
+      validators: [Validators.required],
+    }),
     email: new FormControl('', {
       validators: [Validators.required, Validators.email],
     }),
@@ -55,10 +58,13 @@ export class Signup {
 
     const user: Auth = {
       id: Math.random().toString(),
+      name: this.form.value.name!,
       username: this.form.value.email!,
       password: this.form.value.password!,
       role: this.form.value.role!,
     };
+
+    console.log(user);
 
     this.authService.onSignup(user).subscribe((result) => {
       console.log(result.message);

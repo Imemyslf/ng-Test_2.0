@@ -1,0 +1,46 @@
+export interface Userdata {
+  _id: string;
+  username: string;
+}
+
+export type PRIORITY = 'high' | 'medium' | 'low';
+export type STATUS = 'in-progress' | 'pending';
+
+export interface OptionTypes {
+  value: string;
+  viewValue: string;
+}
+
+export const Priority: OptionTypes[] = [
+  {
+    value: 'high',
+    viewValue: 'High',
+  },
+  {
+    value: 'medium',
+    viewValue: 'Medium',
+  },
+  {
+    value: 'low',
+    viewValue: 'Low',
+  },
+];
+
+export const Status: OptionTypes[] = [
+  {
+    value: 'in-progress',
+    viewValue: 'In-Progress',
+  },
+  {
+    value: 'pending',
+    viewValue: 'Pending',
+  },
+];
+
+export interface Task {
+  title: string;
+  description: string;
+  deadline: string;
+  priority: string;
+  status: string;
+}

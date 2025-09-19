@@ -2,6 +2,10 @@
   <form [formGroup]="form" (submit)="onSubmit()">
     <!-- <div class="namem"> -->
     <mat-form-field for="email">
+      <mat-label>Name</mat-label>
+      <input matInput id="name" name="name" formControlName="name" />
+    </mat-form-field>
+    <mat-form-field for="email">
       <mat-label>Email</mat-label>
       <input matInput id="email" name="email" formControlName="email" />
     </mat-form-field>

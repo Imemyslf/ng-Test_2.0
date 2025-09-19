@@ -1,10 +1,11 @@
 import { Routes } from '@angular/router';
 import { Login } from './auth/login/login';
 import { Signup } from './auth/signup/signup';
-import { Dashboard } from './dashboard/dashboard';
-import { dashRoutes } from './dashboard/dashboard.routes';
-import { Admin } from './dashboard/admin/admin';
+import { Dashboard } from './user/dashboard/dashboard';
+import { dashRoutes } from './routes/dashboard.routes';
+import { Admin } from './admin/admin';
 import { AuthGuard } from './authGuard';
+import { adminRoutes } from './routes/admin.routes';
 
 export const routes: Routes = [
   {
@@ -24,6 +25,7 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: Admin,
+    children: adminRoutes,
     canActivate: [AuthGuard],
   },
 ];

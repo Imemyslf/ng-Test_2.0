@@ -1,18 +1,31 @@
 const User = require("../models/user");
+const Employee = require("../models/employee");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 exports.register = async (req, res, next) => {
   try {
-    const { username, password, role } = req.body;
-    console.log(username, password, role);
+    const { name, username, password, role } = req.body;
+    console.log(name, username, password, role);
 
     const hashPass = await bcrypt.hash(password, 10);
     console.log(hashPass);
-    const newUser = new User({ username, password: hashPass, role });
+    const newUser = await User.create({
+      name,
+      username,
+      password: hashPass,
+      role,
+    });
     console.log(newUser);
-    await newUser.save();
-    console.log("User saved");
+
+    if (role === "employee") {
+      const newEmployee = await Employee.create({
+        user: newUser._id,
+        task: {},
+      });
+
+      console.log(newEmployee);
+    }
     res
       .status(201)
       .json({ message: `User Registered with username ${username}` });

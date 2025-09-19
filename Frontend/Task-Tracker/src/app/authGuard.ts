@@ -7,8 +7,6 @@ import {
   CanDeactivate,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ROLE } from './auth/auth.model';
-
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
   constructor(public router: Router) {}

@@ -5,8 +5,8 @@ import { MatCard } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { AuthService } from '../auth.service';
-import { Auth, User } from '../auth.model';
+import { AuthService } from '../../services/auth.service';
+import { Auth, User } from '../../module/auth.module';
 
 @Component({
   selector: 'app-login',
@@ -39,6 +39,7 @@ export class Login {
 
     const user: Auth = {
       id: Math.random().toString(),
+      name: '',
       username: this.form.value.email!,
       password: this.form.value.password!,
     };
