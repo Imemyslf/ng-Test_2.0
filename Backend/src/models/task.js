@@ -32,6 +32,16 @@ const taskSchema = new Schema(
     fileupload: {
       type: String,
     },
+    assignedTo: {
+      type: Schema.Types.ObjectId,
+      ref: "Employee",
+      required: true,
+    },
+    assignedBy: {
+      type: Schema.Types.ObjectId,  
+      ref: "Admin",
+      required: true,
+    },
   },
   {
     timestamps: true,

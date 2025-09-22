@@ -1,0 +1,28 @@
+<div class="employee-list">
+  @for (employee of employees(); track employee.id) {
+  <mat-card
+    class="employee-card"
+    [class.selected]="selectedEmployeeId === employee.id"
+    [routerLink]="[employee.name, 'tasks']"
+    (click)="onSelectedUser(employee)"
+  >
+    <div class="imageContainer">
+      <img
+        mat-card-avatar
+        class="employee-img"
+        [src]="
+          employee.profileImage
+            ? 'http://localhost:3000/uploads/users/' + employee.profileImage
+            : 'assets/default.jpg'
+        "
+        alt="User Image"
+      />
+    </div>
+    <div class="employee-details">
+      <mat-card-content>
+        {{ employee.name }}
+      </mat-card-content>
+    </div>
+  </mat-card>
+  }
+</div>

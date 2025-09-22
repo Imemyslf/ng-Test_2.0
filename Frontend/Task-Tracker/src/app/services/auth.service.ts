@@ -11,16 +11,13 @@ export class AuthService {
   private httpClient = inject(HttpClient);
   private router = inject(Router);
 
-  onSignup(user: Auth) {
+  role: string | undefined = undefined;
+
+  onSignup(user: FormData) {
     console.log('Inside onSignup', user);
     return this.httpClient.post<{ message: string }>(
       `http://localhost:3000/api/auth/register`,
-      user,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
+      user
     );
   }
 
@@ -33,11 +30,13 @@ export class AuthService {
       })
       .pipe(
         map((result) => {
+          localStorage.removeItem('userToken');
+          localStorage.removeItem('selectedEmployee');
           localStorage.setItem(
             'userToken',
             JSON.stringify({ token: result.token, role: result.role })
           );
-
+          this.role = result.role;
           if (result.role === 'employee') {
             console.log('Going to navigate for user');
             this.router.navigate(['/users']);
@@ -45,6 +44,10 @@ export class AuthService {
           if (result.role === 'admin') {
             console.log('Going to navigate for admin');
             this.router.navigate(['/admin']);
+          }
+          if (result.role === 'reviewer') {
+            console.log('Going to navigate for reviewer');
+            this.router.navigate(['/reviewer']);
           }
           return result;
         })

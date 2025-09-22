@@ -1,7 +1,18 @@
+
 <div class="divider">
-  <app-users-component></app-users-component>
+  <app-employee-component (employeeSelected)="onEmployeeSelected($event)"></app-employee-component>
+
   <div>
-    <button routerLink="/admin/create-task">Add New Task</button>
-    <app-task-list></app-task-list>
+    <div class="btn">
+      <button
+        matButton="elevated"
+        color="primary"
+        (click)="goToCreateTask()"
+        [disabled]="!selectedEmployee"
+      >
+        Add New Task
+      </button>
+    </div>
+    <router-outlet></router-outlet>
   </div>
 </div>

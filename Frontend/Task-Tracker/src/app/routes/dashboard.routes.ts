@@ -1,14 +1,14 @@
 import { Routes } from '@angular/router';
-import { TaskList } from '../task/task-list/task-list';
-import { TaskOverviwe } from '../task/task-overview/task-overviwe';
+import { UserTaskList } from '../user/user-task-list/user-task-list';
+import { UserTaskReport } from '../user/user-task-report/user-task-report';
 
 export const dashRoutes: Routes = [
   {
     path: '',
-    component: TaskList,
+    component: UserTaskList,
   },
   {
-    path: 'task/id',
-    component: TaskOverviwe,
+    path: 'task-report',
+    component: UserTaskReport,
   },
 ];

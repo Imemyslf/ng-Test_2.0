@@ -1,5 +1,5 @@
 <mat-card>
-  <form [formGroup]="form" (submit)="onSubmit()">
+  <form [formGroup]="form" (submit)="onSubmit()" enctype="multipart/form-data">
     <!-- <div class="namem"> -->
     <mat-form-field for="email">
       <mat-label>Name</mat-label>
@@ -32,6 +32,22 @@
         }
       </mat-select>
     </mat-form-field>
+    <div class="uploadFile">
+      <input #fileInput type="file" (change)="onFileSelected($event)" hidden />
+
+      <button mat-raised-button color="accent" (click)="fileInput.click()">
+        <mat-icon>cloud_upload</mat-icon>
+        Choose File
+      </button>
+
+      @if(selectedFile){
+      <span class="file-name">
+        {{ selectedFile.name }}
+      </span>
+      } @else {
+      <span class="file-name"> No file chosen </span>
+      }
+    </div>
     <!-- </div> -->
     <br />
     <button matButton="outlined" color="accent" type="submit">Sign up</button>

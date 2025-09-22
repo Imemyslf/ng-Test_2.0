@@ -35,6 +35,10 @@ export const Status: OptionTypes[] = [
     value: 'pending',
     viewValue: 'Pending',
   },
+  {
+    value: 'completed',
+    viewValue: 'Completed',
+  },
 ];
 
 export interface Task {
@@ -46,4 +50,14 @@ export interface Task {
   status: string;
   createdAt?: string;
   updatedAt?: string;
+}
+
+export interface TaskResponse {
+  title: string;
+  description: string;
+  deadline: string;
+  priority: string;
+  status: string;
+  assignedTo: string;
+  assginedBy: string;
 }

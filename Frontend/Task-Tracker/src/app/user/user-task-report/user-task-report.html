@@ -1,0 +1,31 @@
+<div class="container">
+  <p class="centered">Select the file to upload:</p>
+
+  @if(task !== null){
+  <div class="task-details">
+    <p>Task: {{ task.title }}</p>
+  </div>
+  }
+  <div class="uploadFile">
+    <input #fileInput type="file" (change)="onFileSelected($event)" hidden />
+
+    <button mat-raised-button color="accent" (click)="fileInput.click()">
+      <mat-icon>cloud_upload</mat-icon>
+      Choose File
+    </button>
+
+    @if(selectedFile){
+    <span class="file-name">
+      {{ selectedFile.name }}
+    </span>
+    } @else {
+    <span class="file-name"> No file chosen </span>
+    }
+  </div>
+
+  <div class="btn">
+    <button mat-raised-button color="primary" (click)="onUpload()" [disabled]="!selectedFile">
+      Upload
+    </button>
+  </div>
+</div>

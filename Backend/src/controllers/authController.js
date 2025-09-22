@@ -1,35 +1,44 @@
 const User = require("../models/user");
 const Employee = require("../models/employee");
+const Reviewer = require("../models/reviwer");
+const Admin = require("../models/admin");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 exports.register = async (req, res, next) => {
   try {
     const { name, username, password, role } = req.body;
-    console.log(name, username, password, role);
+    console.log("Body Fields:", req.body);
+    console.log("Uploaded File:", req.file); // profileImage details
 
     const hashPass = await bcrypt.hash(password, 10);
-    console.log(hashPass);
+
     const newUser = await User.create({
       name,
       username,
       password: hashPass,
       role,
+      profileImage: req.file ? req.file.filename : null, // save filename in DB
     });
-    console.log(newUser);
 
+    // role-specific logic...
     if (role === "employee") {
-      const newEmployee = await Employee.create({
-        user: newUser._id,
-        task: {},
+      await Employee.create({ user: newUser._id, task: {} });
+    } else if (role === "reviewer") {
+      await Reviewer.create({ reviewerDataId: newUser._id });
+    } else if (role === "admin") {
+      await Admin.create({
+        adminDataId: newUser._id,
+        previlegeSuperAdmin: false,
       });
-
-      console.log(newEmployee);
     }
-    res
-      .status(201)
-      .json({ message: `User Registered with username ${username}` });
+
+    res.status(201).json({
+      message: `User Registered with username ${username}`,
+      user: newUser,
+    });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ message: "Something went wrong" });
   }
 };

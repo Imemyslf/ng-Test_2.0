@@ -1,0 +1,37 @@
+:host {
+  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 70%;
+  border: 2px solid black;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+p {
+  font-size: larger;
+  font-weight: 600;
+}
+
+.centered {
+  text-align: center;
+}
+
+.task-details {
+  margin-bottom: 20px;
+}
+
+.uploadFile {
+  width: 100%;
+  padding: 1rem;
+  margin: 20px 0;
+}
+
+.btn {
+  display: flex;
+  justify-content: flex-end;
+}

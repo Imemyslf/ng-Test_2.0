@@ -1,8 +1,13 @@
 <mat-toolbar color="primary">
   <span routerLink="/">Task-Preview</span>
   <span class="spacer"></span>
+  @if(_role ){
   <ul>
-    <li><a matButton="elevated" color="accent" routerLink="/login">Login</a></li>
-    <li><a matButton="elevated" color="accent" routerLink="/">Sign up</a></li>
+    <li><a matButton="elevated" color="accent" (click)="logout()">Log Out</a></li>
   </ul>
+  } @else {
+  <ul>
+    <li><a matButton="elevated" color="accent" (click)="logout()">Log In</a></li>
+  </ul>
+  }
 </mat-toolbar>

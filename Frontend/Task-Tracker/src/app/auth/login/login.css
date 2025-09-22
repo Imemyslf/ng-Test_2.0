@@ -25,3 +25,16 @@ button {
   align-self: flex-start;
   margin: 1rem;
 }
+
+.remember {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+}
+
+.remember p:hover,
+.remember p:active {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}

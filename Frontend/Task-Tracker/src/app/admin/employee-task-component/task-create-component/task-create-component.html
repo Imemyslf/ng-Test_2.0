@@ -1,0 +1,42 @@
+<form [formGroup]="form" (submit)="onSubmit()">
+  <mat-form-field for="title">
+    <mat-label>Title</mat-label>
+    <input matInput id="title" name="title" formControlName="title" />
+  </mat-form-field>
+  <mat-form-field for="description">
+    <mat-label>Description</mat-label>
+    <textarea matInput id="description" name="description" formControlName="description"></textarea>
+  </mat-form-field>
+
+  <div class="select-options">
+    <mat-form-field appearance="fill">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="deadline" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label> Priority</mat-label>
+      <mat-select formControlName="priority">
+        @for(priority of priorities; track priority.value){
+        <mat-option value="{{ priority.value }}">{{ priority.viewValue }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label> Status</mat-label>
+      <mat-select formControlName="status">
+        @for(status of status; track status.value){
+        <mat-option value="{{ status.value }}">{{ status.viewValue }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="btn">
+    <button matButton="outlined" color="primary" type="button" (click)="goBack()">Cancel</button>
+    <button matButton="elevated" color="primary" type="submit">
+      {{ isEditMode ? 'Update' : 'Create' }} task
+    </button>
+  </div>
+</form>

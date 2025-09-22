@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { Auth, ROLE, User, userRoles } from '../../module/auth.module';
 import { AuthService } from '../../services/auth.service';
+import { Q } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-signup',
@@ -28,6 +29,7 @@ import { AuthService } from '../../services/auth.service';
 export class Signup {
   private authService = inject(AuthService);
   roles = userRoles;
+  selectedFile: File | null = null;
 
   form = new FormGroup({
     name: new FormControl('', {
@@ -42,6 +44,7 @@ export class Signup {
     role: new FormControl<ROLE>('admin', {
       validators: [Validators.required],
     }),
+    profileImage: new FormControl<File | null>(null),
   });
 
   showPassword = false;
@@ -56,18 +59,37 @@ export class Signup {
     }
     console.log(this.form.value);
 
-    const user: Auth = {
-      id: Math.random().toString(),
-      name: this.form.value.name!,
-      username: this.form.value.email!,
-      password: this.form.value.password!,
-      role: this.form.value.role!,
-    };
+    const formData = new FormData();
+    formData.append('name', this.form.value.name!);
+    formData.append('username', this.form.value.email!);
+    formData.append('password', this.form.value.password!);
+    formData.append('role', this.form.value.role!);
+    if (this.selectedFile) {
+      formData.append('profileImage', this.selectedFile);
+    }
 
-    console.log(user);
+    formData.forEach((value, key) => {
+      console.log(key, value);
+    });
 
-    this.authService.onSignup(user).subscribe((result) => {
+    this.authService.onSignup(formData).subscribe((result) => {
       console.log(result.message);
     });
+  }
+
+  onFileSelected(event: any) {
+    if (event.target.files?.length > 0) {
+      const input = event.target.files[0];
+      this.selectedFile = input;
+      console.log('Selected File: ', this.selectedFile);
+    } else {
+      return;
+    }
+
+    // const file = input.files[0];
+    // this.form.patchValue({ profileImage: input.files[0] });
+    // const file = this.form.get('profileImage')?.value;
+    // console.log('Selected file:', file);
+    // You can implement further logic to handle the selected file, such as uploading it to a server.
   }
 }

@@ -1,0 +1,67 @@
+:host {
+  display: block;
+  width: 80%;
+  margin: auto;
+}
+
+.task-details-div {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+}
+
+.task-details {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 0.1rem;
+}
+
+strong {
+  align-self: center;
+}
+
+.task-details p {
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+
+.eddel {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.priority-high {
+  background-color: #ff0000d2;
+  color: white;
+  font-weight: bold;
+}
+.priority-medium {
+  background-color: #ff5900c4;
+  color: white;
+  font-weight: bold;
+}
+.priority-low {
+  background-color: #008000c4;
+  color: white;
+  font-weight: bold;
+}
+
+.status-pending {
+  background-color: white;
+  color: #0000ffb6;
+  font-weight: bold;
+}
+.status-in-progress {
+  background-color: white;
+  color: #da204bc2;
+  font-weight: bold;
+}
+.status-completed {
+  background-color: white;
+  color: #008000c4;
+  font-weight: bold;
+}

@@ -1,0 +1,32 @@
+@if(tasks()?.length === 0) {
+<p>No tasks available.</p>
+} @else {
+<p>Tasks available: {{ tasks()?.length }}</p>
+
+<mat-accordion>
+  @for(task of tasks(); track task._id){
+
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>Task: {{ task.title }} </mat-panel-title>
+    </mat-expansion-panel-header>
+    <p><strong>Description:</strong> {{ task.description }}</p>
+    <p><strong>Deadline:</strong> {{ task.deadline | date }}</p>
+    <div class="task-details-div">
+      <div class="task-details">
+        <strong>Priority:</strong>
+        <p [class]="'priority-' + task.priority">{{ task.priority.toUpperCase() }}</p>
+      </div>
+      <div class="task-details">
+        <strong>Status:</strong>
+        <p [class]="'status-' + task.status">{{ task.status.toUpperCase() }}</p>
+      </div>
+    </div>
+    <div class="eddel">
+      <button matButton="elevated" color="primary" (click)="onEditTask(task)">Edit</button>
+      <button mat-raised-button color="warn" (click)="onDeleteTask(task._id!)">Delete</button>
+    </div>
+  </mat-expansion-panel>
+  }
+</mat-accordion>
+}
